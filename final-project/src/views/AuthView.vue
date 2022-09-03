@@ -1,6 +1,7 @@
 <template>
   <h1>SigninSignup</h1>
   <button @click="handleSignUp">Sign up </button>
+  <button @click="handleSignIn">Sign in</button>
 </template>
 <script>
 import { mapActions, mapState } from 'pinia';
@@ -12,13 +13,20 @@ export default {
     ...mapState(userStore, ['user']),
   },
   methods: {
-    ...mapActions(userStore, ['signUp']),
+    ...mapActions(userStore, ['signUp', 'signIn']),
     handleSignUp() {
       const userData = {
         email: 'bogdan.victor@ironhack.com',
         password: '1234pass',
       };
       this.signUp(userData.email, userData.password);
+    },
+    handleSignIn() {
+      const userData = {
+        email: 'bogdan.victor@ironhack.com',
+        password: '1234pass',
+      };
+      this.signIn(userData.email, userData.password);
     },
   },
   watch: {
