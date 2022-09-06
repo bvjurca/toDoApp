@@ -6,13 +6,11 @@ export default defineStore('tasks', {
     tasks: [],
   }),
   actions: {
-    async editTask(taskId) {
-      // const { error, data } = await supabase.auth;
+    async addTask(task) {
+      const { data, error } = await supabase.from('tasks').insert(task);
       if (error) throw error;
       if (data) {
-        console.log(data);
-        const currentTask = this.tasks.filter((task) => task.id === taskId);
-        currentTask.title = data;
+        this.tasks.push(data);
       }
     },
 
@@ -21,7 +19,11 @@ export default defineStore('tasks', {
         .from('tasks')
         .select('*')
         .order('id', { ascending: false });
-      this.tasks = tasks;
+      // this.tasks = tasks;
+      this.tasks = tasks.map((task) => ({
+        ...task,
+        inserted_at: new Date(task.inserted_at).toLocaleDateString(),
+      }));
     },
   },
 });
