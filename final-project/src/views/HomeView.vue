@@ -1,7 +1,10 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <h1>Home - ToDoApp</h1>
     <button>Add a task</button>
+    <ol>
+      <li></li>
+    </ol>
   </div>
 </template>
 
@@ -16,7 +19,15 @@ export default {
     ...mapState(taskStore, ['task']),
   },
   methods: {
-    ...mapActions(taskStore, ['fetchTasks']),
+    ...mapActions(taskStore, ['fetchTasks', 'editTask', 'deleteTask']),
+  },
+  async handleDeleteTask(taskId) {
+    const deleted = await this.deleteTask(taskId);
+    if (deleted) {
+      console.log('removed');
+    } else {
+      console.log('not removed, delete does not work :(');
+    }
   },
   created() {
     this.fetchTasks();

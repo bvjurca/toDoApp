@@ -1,5 +1,17 @@
 <template>
   <h1>SigninSignup</h1>
+  <form>
+    <div class="flex flex-col mb-2">
+      <label for="email" class="mb-1 text-sm">Email:
+        <input type="text" required class="p-2 text-gray-500" id="email" v-model="email"/>
+      </label>
+    </div>
+    <div class="flex flex-col mb-2">
+      <label for="password" class="mb-1 text-sm">Password:
+        <input type="password" required class="p-2 text-gray-500" id="password" v-model="password"/>
+      </label>
+    </div>
+  </form>
   <button @click="handleSignUp">Sign up </button>
   <button @click="handleSignIn">Sign in</button>
 </template>
