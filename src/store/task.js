@@ -26,4 +26,9 @@ export default defineStore('tasks', {
       }));
     },
   },
+  getters: {
+    tasksByDate() {
+      return this.tasks.sort((a,b) => (a.inserted_at > b.inserted_at ? -1 : 1));
+    }
+  },
 });
