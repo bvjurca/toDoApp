@@ -1,42 +1,50 @@
 <template>
-  <h1>SigninSignup</h1>
+  <header>
+    <span>Sign in | </span>
+    <router-link to="/register">Sign up</router-link>
+  </header>
   <form>
-    <div class="flex flex-col mb-2">
-      <label for="email" class="mb-1 text-sm">Email:
-        <input type="text" required class="p-2 text-gray-500" id="email" v-model="email"/>
+    <div>
+      <label for="email"
+        >Email:
+        <input
+          type="email"
+          required
+          id="email"
+          v-model="email"
+        />
       </label>
     </div>
-    <div class="flex flex-col mb-2">
-      <label for="password" class="mb-1 text-sm">Password:
-        <input type="password" required class="p-2 text-gray-500" id="password" v-model="password"/>
+    <div>
+      <label for="password"
+        >Password:
+        <input
+          type="password"
+          required
+          id="password"
+          v-model="password"
+        />
       </label>
     </div>
+    <button @click="handleSignIn">Sign in</button>
   </form>
-  <button @click="handleSignUp">Sign up </button>
-  <button @click="handleSignIn">Sign in</button>
 </template>
 <script>
-import { mapActions, mapState } from 'pinia';
-import userStore from '@/store/user';
+import { mapActions, mapState } from "pinia";
+import userStore from "@/store/user";
 
 export default {
-  name: 'AuthView',
+  name: "AuthView",
   computed: {
-    ...mapState(userStore, ['user']),
+    ...mapState(userStore, ["user"]),
   },
   methods: {
-    ...mapActions(userStore, ['signUp', 'signIn']),
-    handleSignUp() {
-      const userData = {
-        email: 'bogdan.victor@ironhack.com',
-        password: '1234pass',
-      };
-      this.signUp(userData.email, userData.password);
-    },
+    ...mapActions(userStore, ["signIn"]),
     handleSignIn() {
       const userData = {
-        email: 'bogdan.victor@ironhack.com',
-        password: '1234pass',
+        email: this.email,
+        password: this.password,
+        confirmPass: this.confirmPass,
       };
       this.signIn(userData.email, userData.password);
     },
@@ -45,7 +53,7 @@ export default {
     user() {
       if (this.user) {
         console.log(this.user);
-        this.$router.push({ path: '/' });
+        this.$router.push({ path: "/" });
       }
     },
   },
