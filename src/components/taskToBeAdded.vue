@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id='addtask'>
       <input
         type="text"
         required
@@ -8,13 +8,14 @@
         placeholder="Type something..."
       />
    
-    <button @click="newTask ">Add task</button>
+    <button @click="newTask">Add task</button>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "pinia";
-import taskStore from "@/store/task";
+import userStore from "../store/user";
+import taskStore from "../store/task";
 
 export default {
   name: "taskToBeAdded",
@@ -24,7 +25,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(taskStore, ["task"]),
+    ...mapState(userStore, ["user"]),
   },
   methods: {
     ...mapActions(taskStore, ["fetchTasks", "addTask"]),

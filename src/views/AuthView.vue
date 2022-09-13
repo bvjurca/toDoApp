@@ -7,26 +7,16 @@
     <div>
       <label for="email"
         >Email:
-        <input
-          type="email"
-          required
-          id="email"
-          v-model="email"
-        />
+        <input type="email" required id="email" v-model="email" />
       </label>
     </div>
     <div>
       <label for="password"
         >Password:
-        <input
-          type="password"
-          required
-          id="password"
-          v-model="password"
-        />
+        <input type="password" required id="password" v-model="password" />
       </label>
     </div>
-    <button @click="handleSignIn">Sign in</button>
+    <button @click.prevent="handleSignIn">Sign in</button>
   </form>
 </template>
 <script>
@@ -35,6 +25,12 @@ import userStore from "@/store/user";
 
 export default {
   name: "AuthView",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
   computed: {
     ...mapState(userStore, ["user"]),
   },
@@ -44,7 +40,6 @@ export default {
       const userData = {
         email: this.email,
         password: this.password,
-        confirmPass: this.confirmPass,
       };
       this.signIn(userData.email, userData.password);
     },

@@ -4,7 +4,7 @@
     <span> | Sign up</span>
   </header>
   <form>
-    <div v-if="errorMsg">
+    <div v-if="errorMsg" class='error-message'>
       <p>{{ errorMsg }}</p>
     </div>
     <div>
@@ -40,7 +40,7 @@
         />
       </label>
     </div>
-    <button @click="handleSignUp">Sign up</button>
+    <button @click.prevent="handleSignUp">Sign up</button>
   </form>
 </template>
 
@@ -53,6 +53,9 @@ export default {
   data() {
     return {
       errorMsg: '',
+      email: '',
+      password: '',
+      confirmPass: '',
     };
   },
   computed: {
@@ -66,7 +69,6 @@ export default {
       const userData = {
         email: this.email,
         password: this.password,
-        confirmPass: this.confirmPass,
       };
       this.signUp(userData.email, userData.password);
       }
@@ -74,6 +76,7 @@ export default {
         this.errorMsg = error.message;
        }
       }
+      else this.errorMsg = 'Passwords do not match!';
     },
   },
   watch: {
