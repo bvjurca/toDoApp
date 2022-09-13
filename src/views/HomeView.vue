@@ -2,17 +2,17 @@
   <div class="home">
     <h1>Home - ToDoApp</h1>
     <task-to-be-added/>
-    <ol>
-      <li></li>
-    </ol>
+    
+    <TaskList/>
   </div>
 </template>
 
 <script>
 import taskToBeAdded from '../components/taskToBeAdded.vue';
+import TaskList from '../components/TaskList.vue';
 
 export default {
   name: 'HomeView',
-  components: { taskToBeAdded }
+  components: { taskToBeAdded, TaskList }
 };
 </script>
