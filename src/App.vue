@@ -1,8 +1,10 @@
 <template>
   <nav v-if="user !== null">
+   
    <!-- <router-link to="/">Home</router-link> | -->
     <router-link @click.prevent = "handleSignOut" to="/auth" id="signout">Sign out</router-link>
   </nav>
+      
   <router-view/>
 </template>
 
@@ -24,6 +26,7 @@ export default {
         this.$router.push('/auth');
       }
     },
+    
   },
   async created() {
     try {

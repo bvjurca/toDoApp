@@ -1,10 +1,9 @@
 <template>
   <div id='addtask'>
       <input
-        type="text"
         required
         id="task"
-        v-model="newTask"
+        v-model="title"
         placeholder="Type something..."
       />
    
@@ -21,7 +20,7 @@ export default {
   name: "taskToBeAdded",
   data() {
     return {
-      newTitle: "",
+      title: "",
     };
   },
   computed: {
@@ -30,8 +29,12 @@ export default {
   methods: {
     ...mapActions(taskStore, ["fetchTasks", "addTask"]),
     newTask() {
-        this.addTask(this.newTitle, this.user.id);
-        this.newTitle = '';
+      const taskContent = { 
+        title: this.title,
+        user_id: this.user.id,
+        isComplete: this.isComplete,
+       };
+        this.addTask(taskContent.title, taskContent.user_id, taskContent.isComplete);
     }
   },
   created() {

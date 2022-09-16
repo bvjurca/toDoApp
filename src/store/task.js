@@ -13,12 +13,12 @@ export default defineStore("tasks", {
     },
   },
   actions: {
-    async addTask(task) {
-      const { data, error } = await supabase.from("tasks").insert(task);
+    async addTask(taskName, userId, taskStatus) {
+      const { error } = await supabase.from("tasks").insert([{ title: taskName, user_id: userId, is_complete: taskStatus }]);
       if (error) throw error;
-      if (data.length) {
-        this.tasks.push(data[0]);
-      }
+      // if (data.length) {
+      //   this.tasks.push(data[0]);
+      // }
     },
 
     async fetchTasks() {

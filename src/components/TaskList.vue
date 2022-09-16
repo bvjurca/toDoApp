@@ -1,76 +1,51 @@
 <template>
-  <table v-if="tasksByDate.length">
-    <tr>
-      <th v-for="col in cols" :key="col.key">{{ col.title }}</th>
-    </tr>
-  </table>
+    <div v-for="task in tasks" :key="task.id" :id="task.id">
+      <div class='task-in-list'>
+        <input
+          aria-label="checkbox"
+          class="checkbox"
+          type="checkbox"
+          v-model="task.is_complete"
+          v-bind:id="task.is_complete"
+        />
+        <input
+          aria-label="title"
+          v-model="task.title"
+          @change="handleEditTitle(task.title, task.id)"
+        />
+        <span v-if="task.is_complete"> COMPLETE!</span>
+        <button @click="deleteTask(task.id)" class="card-link">Remove Task</button>
+      </div>
+    </div>
+
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import taskStore from '@/store/task';
-import userStore from '@/store/user';
 
 export default {
-  name: 'TaskList',
-  data() {
-    return {
-      cols: [
-        {
-          title: 'Title',
-          key: 'title',
-        },
-        {
-          title: 'Date',
-          key: 'date',
-        },
-        {
-          title: 'Status',
-          key: 'status',
-        },
-        {
-          title: 'Action',
-          key: 'action',
-        },
-      ],
-      actions: [
-        {
-          id: 0,
-          title: 'Edit',
-          placeholderAction: this.handleEdit,
-        },
-        {
-          id: 1,
-          title: 'Delete',
-          placeholderAction: this.handleDel,
-        },
-      ],
-    };
-  },
+  name: 'ShowTasks',
   computed: {
-    ...mapState(taskStore, ['tasksByDate']),
-    ...mapState(userStore, ['user']),
+    ...mapState(taskStore, ['tasks']),
   },
   methods: {
-    ...mapActions(taskStore, ['fetchTasks', 'delTask', 'addTask']),
+    ...mapActions(taskStore, ['delTask', 'editStatus', 'editTitle']),
 
-    async handleDel(taskId) {
-      const result = await this.delTask(taskId);
-      if (result) {
-        console.log('Task deleted');
-      } else {
-        console.log('Task not deleted');
+    deleteTask(taskId) {
+      try {
+        this.delTask(taskId);
+        alert('Task deleted');
+      } catch (error) {
+        alert('Error: ', error.message);
       }
     },
-    handleaddTask() {
-      this.addTask({
-        title: 'New task',
-        user_id: this.user.id,
-      });
-    },
+
   },
-  created() {
-    this.fetchTasks();
+  watch: {
+    tasks(state) {
+      console.log(state);
+    },
   },
 };
 </script>

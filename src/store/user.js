@@ -1,9 +1,9 @@
 // /store/user.js
 
-import { defineStore } from 'pinia';
-import supabase from '../supabase';
+import { defineStore } from "pinia";
+import supabase from "../supabase";
 
-export default defineStore('user', {
+export default defineStore("user", {
   state: () => ({
     user: null,
   }),
@@ -34,12 +34,26 @@ export default defineStore('user', {
       if (error) throw error;
       else this.user = null;
     },
+
+    // async passwordReset() {
+    //   const email = prompt("Please enter your email:");
+    //   if (!email) {
+    //     window.alert("Email address is required.");
+    //   } else {
+    //     const { error } = await supabase.auth.api.resetPasswordForEmail(email);
+    //     if (error) {
+    //       alert("Error: " + error.message);
+    //     } else {
+    //       alert("Password recovery email has been sent.");
+    //     }
+    //   }
+    // },
   },
   persist: {
     enabled: true,
     strategies: [
       {
-        key: 'user',
+        key: "user",
         storage: localStorage,
       },
     ],
