@@ -18,6 +18,9 @@
     </div>
     <button @click.prevent="handleSignIn">Sign in</button>
   </form>
+  <!-- <div>
+    <a @click.prevent="handlePasswordReset" href="/"> Forgot your password? </a>
+  </div> -->
 </template>
 <script>
 import { mapActions, mapState } from "pinia";
