@@ -5,16 +5,13 @@ export default defineStore("tasks", {
   state: () => ({
     tasks: [],
   }),
-  getters: {
-    tasksByDate() {
-      return this.tasks.sort((a, b) =>
-        a.inserted_at > b.inserted_at ? -1 : 1
-      );
-    },
-  },
   actions: {
     async addTask(taskName, userId, taskStatus) {
-      const { error } = await supabase.from("tasks").insert([{ title: taskName, user_id: userId, is_complete: taskStatus }]);
+      const { error } = await supabase
+        .from("tasks")
+        .insert([
+          { title: taskName, user_id: userId, is_complete: taskStatus },
+        ]);
       if (error) throw error;
       // if (data.length) {
       //   this.tasks.push(data[0]);
@@ -50,6 +47,22 @@ export default defineStore("tasks", {
         console.error(error);
         return null;
       }
+    },
+    async editStatus(newStatus, taskId) {
+      const { error } = await supabase
+        .from("tasks")
+        .update({ is_complete: newStatus })
+        .match({ id: taskId });
+      if (error) throw error;
+      this.fetchTasks();
+    },
+
+    async editName(newName, taskId) {
+      const { error } = await supabase
+        .from("tasks")
+        .update({ title: newName })
+        .match({ id: taskId });
+      if (error) throw error;
     },
   },
 });
