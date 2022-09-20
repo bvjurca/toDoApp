@@ -32,6 +32,7 @@ form input {
     height: 32px;
     border: #c6c6c6;
     padding-left: 8px;
+    font-family: Avenir;
 }
 
 header {
@@ -63,6 +64,7 @@ a:hover {
     height: 3em;
     border-radius: 0.5em;
     padding: 8px;
+    font-family: Avenir;
 }
 
 .error-message, #signout:hover {
@@ -99,7 +101,7 @@ a:hover {
 #kill {
     background-color: #fff;
     color: #ff5252;
-    width: 6vw;
+    width: 8vw;
 
 }
 #kill:hover {
@@ -116,20 +118,21 @@ a:hover {
 height: 3em;
 }
 
-.task-title {
+.task-name {
     border:none;
-    background-color: rgb(251, 251, 251);
-    width: 50vw;
+    background-color: #fff;
+    width: 65vw;
 }
 
-#task-in-list {
+.task-in-list {
     display: flex;
-    width: 90%;
+    flex-direction: column;
+    align-items: center;
 }
 li {
     list-style: none;
     display: flex;
-    justify-content: center;
+    align-items: center;
     padding: 4px;
 }
 li input, li button {
@@ -138,4 +141,29 @@ li input, li button {
 
 li input {
     height: 3em;
+    font-size: 1em;
+    font-family: Avenir;
+    font-weight: 500;
+}
+
+:focus {
+    outline-color: #07b828;
+}
+
+#kill:focus {
+    outline-color: #ff5252;
+}
+
+#done {
+    font-size: 0.7em;
+}
+
+@media (max-width: 1024px) {
+    .task-in-list {
+        align-items: flex-start;
+        margin-left: 2.8vw;
+    }
+    #addtask input {
+        width: 80%;
+    }
 }

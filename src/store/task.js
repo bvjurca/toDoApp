@@ -13,9 +13,6 @@ export default defineStore("tasks", {
           { title: taskName, user_id: userId, is_complete: taskStatus },
         ]);
       if (error) throw error;
-      // if (data.length) {
-      //   this.tasks.push(data[0]);
-      // }
     },
 
     async fetchTasks() {

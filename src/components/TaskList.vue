@@ -1,22 +1,26 @@
 <template>
   <ul class="task-in-list">
-    <li v-for="task in tasks" :key="task.id" :id="task.id">
+    <li v-for="task in tasks" :key="task.id">
       <input
         class="checkbox"
-        @click="handleTaskStatus(task.is_complete, task.id)"
+        @click="handleTaskStatus(task.is_complete, task.id);"
         type="checkbox"
         v-model="task.is_complete"
         v-bind:id="task.is_complete"
       />
-      <input
-        class="task-title"
-        v-model="task.title"
-        @change="handleTaskName(task.title, task.id)"
-      />
-      <span v-if="task.is_complete"> COMPLETE!</span>
+      <div class="content">
+        <input
+          class="task-name"
+          v-model="task.title"
+          @change="handleTaskName(task.title, task.id)"
+        />
+        <span v-if="task.is_complete" id='done'> DONE!</span>
+      </div>
       <button id="kill" @click="deleteTask(task.id)">Remove</button>
+
     </li>
   </ul>
+  
 </template>
 
 <script>
