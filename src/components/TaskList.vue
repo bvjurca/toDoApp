@@ -1,46 +1,59 @@
 <template>
-    <div v-for="task in tasks" :key="task.id" :id="task.id">
-      <div class='task-in-list'>
+  <ul class="task-in-list">
+    <li v-for="task in tasks" :key="task.id">
+      <input
+        class="checkbox"
+        @click="handleTaskStatus(task.is_complete, task.id);"
+        type="checkbox"
+        v-model="task.is_complete"
+        v-bind:id="task.is_complete"
+      />
+      <div class="content">
         <input
-          aria-label="checkbox"
-          class="checkbox"
-          type="checkbox"
-          v-model="task.is_complete"
-          v-bind:id="task.is_complete"
-        />
-        <input
-          aria-label="title"
+          class="task-name"
           v-model="task.title"
-          @change="handleEditTitle(task.title, task.id)"
+          @change="handleTaskName(task.title, task.id)"
         />
-        <span v-if="task.is_complete"> COMPLETE!</span>
-        <button @click="deleteTask(task.id)" class="card-link">Remove Task</button>
+        <span v-if="task.is_complete" id='done'> DONE!</span>
       </div>
-    </div>
+      <button id="kill" @click="deleteTask(task.id)">Remove</button>
 
+    </li>
+  </ul>
+  
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia';
-import taskStore from '@/store/task';
+import { mapActions, mapState } from "pinia";
+import taskStore from "@/store/task";
 
 export default {
-  name: 'ShowTasks',
+  name: "ShowTasks",
   computed: {
-    ...mapState(taskStore, ['tasks']),
+    ...mapState(taskStore, ["tasks"]),
   },
   methods: {
-    ...mapActions(taskStore, ['delTask', 'editStatus', 'editTitle']),
+    ...mapActions(taskStore, ["delTask", "editStatus", "editName"]),
 
     deleteTask(taskId) {
       try {
         this.delTask(taskId);
-        alert('Task deleted');
+        alert("Task deleted");
       } catch (error) {
-        alert('Error: ', error.message);
+        alert("Error: ", error.message);
       }
     },
+    handleTaskStatus(task, taskID) {
+      this.editStatus(!task, taskID);
+    },
 
+    handleTaskName(title, taskID) {
+      if (title.length !== 0) {
+        this.editName(title, taskID);
+      } else {
+        alert("Empty task? That doesn't make sense");
+      }
+    },
   },
   watch: {
     tasks(state) {
