@@ -21,7 +21,7 @@ button {
   border-radius: 3em;
 }
 button:disabled {
-    background-color: #c6c6c6;
+  background-color: #c6c6c6;
 }
 
 .content {
@@ -76,7 +76,7 @@ a:hover {
 #addtask input {
   width: 60em;
   border: none;
-  background-color: #eee;
+  background-color: rgb(240, 240, 242);
   height: 3em;
   border-radius: 0.5em;
   padding: 8px;
@@ -84,7 +84,7 @@ a:hover {
 }
 
 #addtask input:focus {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .error-message,
@@ -153,7 +153,7 @@ li {
   display: flex;
   align-items: center;
   padding: 4px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgb(240, 240, 242);
 }
 li input,
 li button {
@@ -180,9 +180,17 @@ li input {
   font-style: italic;
   font-weight: 600;
   margin-right: 20px;
-  color:#07b828;
+  color: #07b828;
 }
 
+.emptystate img {
+  margin-top: 40px;
+  width: 15vw;
+  
+}
+.emptystate {
+  margin: auto;
+}
 
 @media (max-width: 1024px) {
   .task-in-list {
@@ -191,5 +199,8 @@ li input {
   }
   #addtask input {
     width: 80%;
+  }
+  .emptystate img {
+    width: 20vw;
   }
 }
