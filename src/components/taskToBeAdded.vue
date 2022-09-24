@@ -7,7 +7,8 @@
         placeholder="Type something..."
       />
    
-    <button @click="newTask">Add task</button>
+    <button @click="newTask"
+    :disabled="!title.length">Add task</button> <!--can't add blank task-->
   </div>
 </template>
 

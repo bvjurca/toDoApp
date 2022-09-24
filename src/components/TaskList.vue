@@ -12,6 +12,7 @@
         <input
           class="task-name"
           v-model="task.title"
+          :style="task.is_complete ? 'text-decoration: line-through': 'text-decoration:none'"
           @change="handleTaskName(task.title, task.id)"
         />
         <span v-if="task.is_complete" id='done'> DONE!</span>
@@ -38,7 +39,7 @@ export default {
     deleteTask(taskId) {
       try {
         this.delTask(taskId);
-        alert("Task deleted");
+        alert("Task deleted. Please refresh page.");
       } catch (error) {
         alert("Error: ", error.message);
       }
