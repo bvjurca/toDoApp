@@ -153,6 +153,7 @@ li {
   display: flex;
   align-items: center;
   padding: 4px;
+  border-bottom: 1px solid #eee;
 }
 li input,
 li button {
@@ -181,6 +182,7 @@ li input {
   margin-right: 20px;
   color:#07b828;
 }
+
 
 @media (max-width: 1024px) {
   .task-in-list {
