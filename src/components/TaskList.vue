@@ -25,6 +25,7 @@
           @change="handleTaskName(task.title, task.id)"
         />
         <span v-if="task.is_complete" id="done"> DONE!</span>
+        <span id="date">{{ task.inserted_at }}</span>
       </div>
       <button id="kill" @click="deleteTask(task.id)">Remove</button>
     </li>
@@ -51,13 +52,13 @@ export default {
         alert("Error: ", error.message);
       }
     },
-    handleTaskStatus(task, taskID) {
-      this.editStatus(!task, taskID);
+    handleTaskStatus(task, taskId) {
+      this.editStatus(!task, taskId);
     },
 
-    handleTaskName(title, taskID) {
+    handleTaskName(title, taskId) {
       if (title.length !== 0) {
-        this.editName(title, taskID);
+        this.editName(title, taskId);
       } else {
         alert("Empty task? That doesn't make sense");
       }

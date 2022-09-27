@@ -28,6 +28,7 @@ button:disabled {
   display: flex;
   max-width: 66vw;
   align-items: center;
+  word-wrap: text-wrap;
 }
 .content input {
   display: flex;
@@ -190,6 +191,11 @@ li input {
 }
 .emptystate {
   margin: auto;
+}
+
+#date {
+  font-size: 0.75em;
+  width: 10vw;
 }
 
 @media (max-width: 1024px) {
