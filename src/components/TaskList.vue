@@ -1,6 +1,11 @@
 <template>
+  <section class="emptystate" v-if="!tasks.length">
+    <img src="https://i.imgur.com/qN1iZfK.jpg" alt="task illustration" />
+    <h2>So far, nothing here</h2>
+    <p>Your tasks will appear here once you create them</p>
+  </section>
   <ul class="task-in-list">
-    <li v-for="task in tasks" :key="task.id" :id="task.id">
+    <li v-for="task in tasks" :key="task.id">
       <input
         class="checkbox"
         @click="handleTaskStatus(task.is_complete, task.id)"
@@ -8,12 +13,20 @@
         v-model="task.is_complete"
         v-bind:id="task.is_complete"
       />
-      <input
-        class="task-title"
-        v-model="task.title"
-        @change="handleTaskName(task.title, task.id)"
-      />
-      <span v-if="task.is_complete"> COMPLETE!</span>
+      <div class="content">
+        <input
+          class="task-name"
+          v-model="task.title"
+          :style="
+            task.is_complete
+              ? 'text-decoration: line-through'
+              : 'text-decoration:none'
+          "
+          @change="handleTaskName(task.title, task.id)"
+        />
+        <span v-if="task.is_complete" id="done"> DONE!</span>
+        <span id="date">{{ task.inserted_at }}</span>
+      </div>
       <button id="kill" @click="deleteTask(task.id)">Remove</button>
     </li>
   </ul>
@@ -34,18 +47,18 @@ export default {
     deleteTask(taskId) {
       try {
         this.delTask(taskId);
-        alert("Task deleted");
+        alert("Task deleted. Please refresh page.");
       } catch (error) {
         alert("Error: ", error.message);
       }
     },
-    handleTaskStatus(task, taskID) {
-      this.editStatus(!task, taskID);
+    handleTaskStatus(task, taskId) {
+      this.editStatus(!task, taskId);
     },
 
-    handleTaskName(title, taskID) {
+    handleTaskName(title, taskId) {
       if (title.length !== 0) {
-        this.editName(title, taskID);
+        this.editName(title, taskId);
       } else {
         alert("Empty task? That doesn't make sense");
       }

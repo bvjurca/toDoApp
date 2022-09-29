@@ -1,141 +1,236 @@
 form {
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(242, 241, 241);
-    border-radius: 8px;
-    width: 30vw;
-    margin: auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(242, 241, 241);
+  border-radius: 8px;
+  width: 30vw;
+  margin: auto;
 }
 
 button {
-    height: 40px;
-    font-size: 1em;
-    background-color: #07b828;
-    color: #fff;
-    border: none;
-    font-weight: 800;
-    font-family: Avenir;
-    width: 12vw;
-    margin-top: 16px;
-    border-radius: 3em;
+  height: 40px;
+  font-size: 1em;
+  background-color: #07b828;
+  color: #fff;
+  border: none;
+  font-weight: 800;
+  font-family: "Avenir";
+  width: 10vw;
+  margin-top: 16px;
+  border-radius: 3em;
+}
+button:disabled {
+  background-color: #c6c6c6;
+}
 
+.content {
+  display: flex;
+  max-width: 66vw;
+  align-items: center;
+  word-wrap: text-wrap;
+}
+.content input {
+  display: flex;
+  flex-shrink: 0.6;
 }
 
 form button {
-    width: 80%;
-    margin: auto;
-    margin-top: 6px;
-    
+  width: 80%;
+  margin: auto;
+  margin-top: 6px;
 }
 form input {
-    height: 32px;
-    border: #c6c6c6;
-    padding-left: 8px;
+  height: 32px;
+  border: #c6c6c6;
+  padding-left: 8px;
+  font-family: "Avenir";
 }
 
 header {
-    margin: 20px;
+  margin: 20px;
 }
 
 form div {
-    margin: 4px;
+  margin: 4px;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover {
-    color: #07b828;
+  color: #07b828;
 }
 
 #addtask {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #addtask input {
-    width: 60em;
-    border: none;
-    background-color: #eee;
-    height: 3em;
-    border-radius: 0.5em;
-    padding: 8px;
+  width: 60em;
+  border: none;
+  background-color: rgb(240, 240, 242);
+  height: 3em;
+  border-radius: 0.5em;
+  padding: 8px;
+  font-family: "Avenir";
 }
 
-.error-message, #signout:hover {
-    color: red;
+#addtask input:focus {
+  background-color: #fff;
+}
+
+.error-message,
+#signout:hover {
+  color: red;
 }
 
 #signout {
-    font-weight: 400;
-    float: right;
+  font-weight: 400;
+  float: right;
 }
 
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-  }
-  
-  nav {
-    padding: 30px;
-    
-  }
-  
-  nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-  
-  nav a.router-link-exact-active {
-    color: #42b983;
-  }
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
 
 #kill {
-    background-color: #fff;
-    color: #ff5252;
-    width: 6vw;
-
+  background-color: #fff;
+  color: #ff5252;
+  width: 7vw;
 }
 #kill:hover {
-    color: #fff;
-    background-color: #ff5252;
-    transition: all 300ms ease;
+  color: #fff;
+  background-color: #ff5252;
+  transition: all 300ms ease;
 }
 
 .hello {
-    font-style: italic;
+  font-style: italic;
 }
 
 .checkbox {
-height: 3em;
+  height: 3em;
 }
 
-.task-title {
-    border:none;
-    background-color: rgb(251, 251, 251);
-    width: 50vw;
+.task-name {
+  border: none;
+  background-color: #fff;
+  width: 65vw;
 }
 
-#task-in-list {
-    display: flex;
-    width: 90%;
+.task-in-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 li {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 4px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-bottom: 1px solid rgb(240, 240, 242);
 }
-li input, li button {
-    margin: 0 12px;
+li button {
+  margin: 0 12px;
 }
 
 li input {
-    height: 3em;
+  height: 3em;
+  font-size: 1em;
+  font-family: "Avenir";
+  font-weight: 500;
+  margin: 0 8px;
+}
+
+:focus {
+  outline-color: #07b828;
+}
+
+#kill:focus {
+  outline-color: #ff5252;
+}
+
+#done {
+  font-size: 0.75em;
+  font-style: italic;
+  font-weight: 600;
+  margin-right: 20px;
+  color: #07b828;
+}
+
+.emptystate img {
+  margin-top: 40px;
+  width: 15vw;
+}
+.emptystate {
+  margin: auto;
+}
+
+#date {
+  display: flex;
+  flex-shrink: 1;
+  z-index: 1;
+  font-size: 0.75em;
+  width: 10vw;
+}
+
+@media (max-width: 1024px) {
+  .task-in-list {
+    align-items: flex-start;
+    margin-left: 2.8vw;
+  }
+  #addtask input {
+    width: 80%;
+  }
+  .emptystate img {
+    width: 20vw;
+  }
+}
+@media (max-width: 640px) {
+  body {
+    margin: 1.4vw;
+  }
+  h1 {
+    font-size: 1.2em;
+  }
+  button {
+    min-width: 25vw;
+    font-size: 0.85em;
+  }
+  .task-in-list {
+    display: contents;
+  }
+  li {
+    padding: 4px 0;
+  }
+  li input {
+    margin: 0 4px;
+  }
+  #date {
+    width: 15vw;
+  }
+  form {
+    width: 80%;
+  }
 }
