@@ -15,7 +15,7 @@ button {
   color: #fff;
   border: none;
   font-weight: 800;
-  font-family: Avenir;
+  font-family: "Avenir";
   width: 10vw;
   margin-top: 16px;
   border-radius: 3em;
@@ -34,11 +34,6 @@ button:disabled {
   display: flex;
   flex-shrink: 0.6;
 }
-.content span {
-  display: flex;
-  flex-shrink: 1;
-  z-index: 1;
-}
 
 form button {
   width: 80%;
@@ -49,7 +44,7 @@ form input {
   height: 32px;
   border: #c6c6c6;
   padding-left: 8px;
-  font-family: Avenir;
+  font-family: "Avenir";
 }
 
 header {
@@ -81,7 +76,7 @@ a:hover {
   height: 3em;
   border-radius: 0.5em;
   padding: 8px;
-  font-family: Avenir;
+  font-family: "Avenir";
 }
 
 #addtask input:focus {
@@ -99,7 +94,7 @@ a:hover {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -156,7 +151,6 @@ li {
   padding: 4px;
   border-bottom: 1px solid rgb(240, 240, 242);
 }
-li input,
 li button {
   margin: 0 12px;
 }
@@ -164,8 +158,9 @@ li button {
 li input {
   height: 3em;
   font-size: 1em;
-  font-family: Avenir;
+  font-family: "Avenir";
   font-weight: 500;
+  margin: 0 8px;
 }
 
 :focus {
@@ -187,13 +182,15 @@ li input {
 .emptystate img {
   margin-top: 40px;
   width: 15vw;
-  
 }
 .emptystate {
   margin: auto;
 }
 
 #date {
+  display: flex;
+  flex-shrink: 1;
+  z-index: 1;
   font-size: 0.75em;
   width: 10vw;
 }
@@ -208,5 +205,32 @@ li input {
   }
   .emptystate img {
     width: 20vw;
+  }
+}
+@media (max-width: 640px) {
+  body {
+    margin: 1.4vw;
+  }
+  h1 {
+    font-size: 1.2em;
+  }
+  button {
+    min-width: 25vw;
+    font-size: 0.85em;
+  }
+  .task-in-list {
+    display: contents;
+  }
+  li {
+    padding: 4px 0;
+  }
+  li input {
+    margin: 0 4px;
+  }
+  #date {
+    width: 15vw;
+  }
+  form {
+    width: 80%;
   }
 }
