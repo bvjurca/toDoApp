@@ -7,15 +7,29 @@ export default defineStore("tasks", {
   }),
   actions: {
     async addTask(taskName, userId, taskStatus) {
-      const { error } = await supabase
-        .from("tasks")
-        .insert([
-          { title: taskName, user_id: userId, is_complete: taskStatus },
-        ]);
-      if (error) throw error;
+      try {
+        // first prevent task duplication
+        const { data } = await supabase
+          .from("tasks")
+          .select("title, user_id")
+          .match({ title: taskName, user_id: userId });
+        if (data && data.length) {
+          alert("Task already exists");
+        } else {
+          //then allow creation
+          const { error } = await supabase
+            .from("tasks")
+            .insert([
+              { title: taskName, user_id: userId, is_complete: taskStatus },
+            ]);
+          if (error) throw error;
+        }
+      } catch (error) {
+        console.error(error);
+      }
     },
     timeConv(insertedDate) {
-    //let's convert the supabase date into something more user friendly
+      //let's convert the supabase date into something more user friendly
       var msPerMinute = 60 * 1000;
       var msPerHour = msPerMinute * 60;
       var msPerDay = msPerHour * 24;
@@ -28,16 +42,15 @@ export default defineStore("tasks", {
       } else if (timeAgo < msPerHour) {
         return Math.round(timeAgo / msPerMinute) + " min ago";
       } else if (timeAgo < msPerDay) {
-        return Math.round(timeAgo / msPerHour) + " h ago";
+        return Math.round(timeAgo / msPerHour) + "h ago";
       } else if (timeAgo < msPerMonth) {
-        return "about " + Math.round(timeAgo / msPerDay) + " d ago";
+        return "about " + Math.round(timeAgo / msPerDay) + "d ago";
       } else if (timeAgo < msPerYear) {
         return "about " + Math.round(timeAgo / msPerMonth) + " mo ago";
       } else {
-        return "about " + Math.round(timeAgo / msPerYear) + " y ago";
+        return "about " + Math.round(timeAgo / msPerYear) + "y ago";
       }
     },
-
 
     async fetchTasks() {
       const { data: tasks } = await supabase
@@ -46,7 +59,7 @@ export default defineStore("tasks", {
         .order("id", { ascending: false });
       this.tasks = tasks.map((task) => ({
         ...task,
-        inserted_at: this.timeConv(task.inserted_at)
+        inserted_at: this.timeConv(task.inserted_at),
       }));
     },
     async delTask(taskId) {

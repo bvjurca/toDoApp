@@ -2,13 +2,14 @@
   <div id='addtask'>
       <input
         required
+        ref="incomingTask"
         id="task"
         v-model="title"
         placeholder="Type something..."
       />
    
     <button @click="newTask"
-    :disabled="!title.length">Add task</button> <!--can't add blank task-->
+    :disabled="title.length < 4">Add task</button> <!--supabase needs it to be at least 4 chars-->
   </div>
 </template>
 
@@ -26,6 +27,7 @@ export default {
   },
   computed: {
     ...mapState(userStore, ["user"]),
+     ...mapState(taskStore, ["tasks"]),
   },
   methods: {
     ...mapActions(taskStore, ["fetchTasks", "addTask"]),
@@ -36,6 +38,8 @@ export default {
         isComplete: this.isComplete,
        };
         this.addTask(taskContent.title, taskContent.user_id, taskContent.isComplete);
+        //this.querySelector('#task').value = 'Type something...';      clear input attempt:(
+      
     }
   },
   created() {

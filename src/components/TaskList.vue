@@ -60,7 +60,7 @@ export default {
       if (title.length !== 0) {
         this.editName(title, taskId);
       } else {
-        alert("Empty task? That doesn't make sense");
+        throw new Error("Empty task? That doesn't make sense");
       }
     },
   },
